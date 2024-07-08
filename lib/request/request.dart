@@ -10,8 +10,8 @@ import 'package:kazumi/request/interceptor.dart';
 class Request {
   static final Request _instance = Request._internal();
   static late final Dio dio;
-  Box setting = GStorage.setting;
-  static Box localCache = GStorage.localCache;
+  // Box setting = GStorage.setting;
+  // static Box localCache = GStorage.localCache;
   late bool enableSystemProxy;
   factory Request() => _instance;
 
@@ -28,10 +28,12 @@ class Request {
 
   // 设置代理
   static setProxy() {
-    var systemProxyHost =
-        localCache.get(LocalCacheKey.systemProxyHost, defaultValue: '');
-    var systemProxyPort =
-        localCache.get(LocalCacheKey.systemProxyPort, defaultValue: '');
+    // var systemProxyHost =
+    //     localCache.get(LocalCacheKey.systemProxyHost, defaultValue: '');
+    var systemProxyHost = '127.0.0.1';
+    // var systemProxyPort =
+    //     localCache.get(LocalCacheKey.systemProxyPort, defaultValue: '');
+    var systemProxyPort = '1080';
     dio.httpClientAdapter = IOHttpClientAdapter(
         createHttpClient: () {
           final HttpClient client = HttpClient();
@@ -72,8 +74,9 @@ class Request {
       headers: {},
     );
 
-    enableSystemProxy = setting.get(SettingBoxKey.enableSystemProxy,
-        defaultValue: false) as bool;
+    // enableSystemProxy = setting.get(SettingBoxKey.enableSystemProxy,
+    //     defaultValue: false) as bool;
+    enableSystemProxy = true;
 
     dio = Dio(options);
     debugPrint('Dio 初始化完成');

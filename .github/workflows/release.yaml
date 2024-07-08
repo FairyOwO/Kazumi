@@ -68,7 +68,7 @@
           - run: |
                   $tag = "${{ github.ref }}".Replace('refs/tags/', '')
                   echo "tag=$(echo $tag)" >> $env:GITHUB_ENV
-          - run: echo "Kazumi_windows_${env:tag}.zip build progress"
+          - run: echo "Kazumi_windows.zip build progress"
           - run: choco install yq
           - name: Set up Flutter
             uses: subosito/flutter-action@v2
@@ -86,13 +86,13 @@
               java-version: '18'
           - run: flutter pub get
           - run: flutter build windows   
-          - run: Compress-Archive build/windows/x64/runner/Release/* Kazumi_windows_${env:tag}.zip
+          - run: Compress-Archive build/windows/x64/runner/Release/* Kazumi_windows.zip
           - name: Upload windows outputs
             uses: actions/upload-artifact@v4
             with:
               name: windows_outputs
               path: |
-                Kazumi_windows_*.zip
+                Kazumi_windows.zip
 
       release:
         name: "Release"
